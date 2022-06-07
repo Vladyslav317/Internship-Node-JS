@@ -8,6 +8,6 @@ You can type either public or private as a parameter of the function and get a s
 
 # Usage
 
-`const getIpInfo = require('get-specific-ip');`
+`const getIp = require('get-specific-ip');`
 
-`getIpInfo('private');`
+`const result = getIp.getIpInfo('private')`;
