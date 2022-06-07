@@ -23,5 +23,3 @@ exports.getIpInfo = function getIpInfo(option) {
     });
   }
 }
-
-getIpInfo('public');
