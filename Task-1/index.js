@@ -1,12 +1,27 @@
-const ip = require('ip');
+const os = require('os');
+const http = require('http');
 
-exports.getIpInfo = function() {
-  const myIpAddress = '192.168.0.104';
-  const unusubleAddress = '0.0.0.0';
+exports.getIpInfo = function getIpInfo(option) {
+  const interfaces = os.networkInterfaces();
+  const address = [];
 
-  if (myIpAddress !== ip.address()) {
-    return unusubleAddress;
+  if (option === 'private') {
+    for (const key in interfaces) {
+      interfaces[key].forEach(value => {
+        if (value.family === 'IPv4' && value.internal === false) {
+          address.push(value.address);
+        }
+      });
+    }
+
+    console.log('Private ip address: ' + address.join('') || '0.0.0.0');
   }
 
-  return myIpAddress;
+  if (option === 'public') {
+    http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(response) {
+      response.on('data', ip => console.log(`Public ip address: ${ip}` || '0.0.0.0'));
+    });
+  }
 }
+
+getIpInfo('public');

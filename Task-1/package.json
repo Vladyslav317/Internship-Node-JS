@@ -1,5 +1,5 @@
 {
-  "name": "get-ip-information",
+  "name": "get-specific-ip",
   "version": "1.0.1-alpha",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,9 @@
   },
   "homepage": "https://github.com/Vladyslav317/Internship-Node-JS#readme",
   "dependencies": {
-    "ip": "^1.1.8"
+    "os": "^0.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.17.0"
   }
 }
