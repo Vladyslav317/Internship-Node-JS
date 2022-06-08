@@ -1,7 +1,7 @@
 const os = require('os');
 const http = require('http');
 
- function getIpInfo(option) {
+exports.getIpInfo = function(option) {
   const interfaces = os.networkInterfaces();
   const address = [];
 
@@ -23,5 +23,3 @@ const http = require('http');
     });
   }
 }
-
-getIpInfo('public');
