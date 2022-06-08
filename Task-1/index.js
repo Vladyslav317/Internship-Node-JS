@@ -1,7 +1,7 @@
 const os = require('os');
 const http = require('http');
 
-exports.getIpInfo = function(option) {
+ function getIpInfo(option) {
   const interfaces = os.networkInterfaces();
   const address = [];
 
@@ -18,8 +18,10 @@ exports.getIpInfo = function(option) {
   }
 
   if (option === 'public') {
-    http.get({'host': 'ifconfig.co', 'port': 80, 'path': '/'}, function(response) {
+    http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(response) {
       response.on('data', ip => console.log(`Public ip address: ${ip}` || '0.0.0.0'));
     });
   }
 }
+
+getIpInfo('public');
