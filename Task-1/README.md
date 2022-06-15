@@ -10,4 +10,5 @@ You can type either public or private as a parameter of the function and get a s
 
 `const getIp = require('get-specific-ip');`
 
-`const result = getIp.getIpInfo('private')`;
+`getIp.getIpInfo('public')`
+  `.then(result => console.log(result));`;
