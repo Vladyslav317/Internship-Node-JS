@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify( {api: 'post'} ));
   } else if (req.url === '/home' && req.method === 'PUT') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify( {method: 'put'} ));
   } else if (req.url === '/home' && req.method === 'PATCH') {
     res.writeHead(200, { 'Content-Type': 'application/json' });

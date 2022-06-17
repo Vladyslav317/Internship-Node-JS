@@ -1,0 +1,15 @@
+{
+  "name": "servers",
+  "version": "1.0.0",
+  "description": "net, upd, http",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vladyslav Kulakov",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.17.0"
+  }
+}
