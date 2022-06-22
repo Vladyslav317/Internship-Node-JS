@@ -1,5 +1,5 @@
 const UserService = require('./service');
-const { UserModel } = require('./model');
+const UserModel = require('./model');
 
 const { schemaForName, schemaForBoth } = require('./validation');
 
@@ -31,7 +31,7 @@ async function create(req, res, next) {
 
     UserModel.push(newUser);
 
-    res.status(201).json(UserModel);
+    res.status(201).json(UserModel[UserModel.length - 1]);
   } catch (error) {
     if (error.isJoi) {
       res.status(400).send(error.details[0].message);
