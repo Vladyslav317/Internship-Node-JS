@@ -1,12 +1,6 @@
 const UserModel = [{
-  email: 'test@gmail.com'
+  email: 'test@gmail.com',
+  name: 'user'
 }];
 
-async function findAll() {
-  return UserModel.find(user => user);
-}
-
-module.exports = {
-  findAll,
-  UserModel
-}
+module.exports = UserModel;

@@ -1,16 +1,16 @@
-const UserService = require('./model');
+const UserService = require('./service');
 const { UserModel } = require('./model');
 
-const { schemaForEmail, schemaForName, schemaForBoth } = require('./validation');
+const { schemaForName, schemaForBoth } = require('./validation');
 
 async function getAll(req, res, next) {
   try {
     const users = await UserService.findAll();
-    await schemaForEmail.validateAsync(users);
+    await schemaForBoth.validateAsync(users);
     res.status(200).json({ email: users.email });
   } catch (error) {
-    if (error.isJoi === true) {
-      res.status(400).json({ message: "Email is invalid" });
+    if (error.isJoi) {
+      res.status(400).send(error.details[0].message);
     }
     next(error);
   }
@@ -31,10 +31,10 @@ async function create(req, res, next) {
 
     UserModel.push(newUser);
 
-    res.status(201).json(UserModel[UserModel.length - 1]);
+    res.status(201).json(UserModel);
   } catch (error) {
-    if (error.isJoi === true) {
-      res.status(400).json({ message: "Email or name is invalid" });
+    if (error.isJoi) {
+      res.status(400).send(error.details[0].message);
     }
     next(error);
   }
@@ -54,8 +54,8 @@ async function update(req, res, next) {
       }
     });
   } catch (error) {
-    if (error.isJoi === true) {
-      res.json({ message: "Name is invalid" });
+    if (error.isJoi) {
+      res.status(400).send(error.details[0].message);
     }
 
     next();
@@ -67,18 +67,16 @@ async function remove(req, res) {
     await schemaForName.validateAsync({ name: req.body.name });
 
     UserModel.forEach(user => {
-      if (req.body.name) {
-        if (req.body.name === user.name) {
-          delete(user.name);
-          res.status(200).json({ email: user.email });
-        } else {
-          res.status(400).json({ message: 'No name was found', user });
-        }
+      if (req.body.name === user.name) {
+        delete(user.name);
+        res.status(200).json({ email: user.email });
+      } else {
+        res.status(400).json({ message: 'No name was found', user });
       }
     });
   } catch (error) {
-    if (error.isJoi === true) {
-      res.json({ message: "Name is invalid" });
+    if (error.isJoi) {
+      res.status(400).send(error.details[0].message);
     }
   }
 }
