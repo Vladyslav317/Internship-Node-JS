@@ -8,6 +8,11 @@ const schemaForName = Joi.object({
   .required(),
 });
 
+const schemaForEmail = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+});
+
 
 const schemaForBoth = Joi.object({
   name: Joi.string()
@@ -23,5 +28,6 @@ const schemaForBoth = Joi.object({
 
 module.exports = {
   schemaForName,
+  schemaForEmail,
   schemaForBoth
 }

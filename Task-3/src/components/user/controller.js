@@ -1,12 +1,16 @@
 const UserService = require('./service');
 const UserModel = require('./model');
 
-const { schemaForName, schemaForBoth } = require('./validation');
+const { schemaForName, schemaForEmail, schemaForBoth } = require('./validation');
 
 async function getAll(req, res, next) {
   try {
     const users = await UserService.findAll();
-    await schemaForBoth.validateAsync(users);
+    if (users.email && users.name) {
+      await schemaForBoth.validateAsync(users);
+    } else if (users.email || users.name) {
+      await schemaForEmail.validateAsync(users);
+    }
     res.status(200).json({ email: users.email });
   } catch (error) {
     if (error.isJoi) {
