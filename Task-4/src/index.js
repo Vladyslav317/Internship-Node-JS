@@ -6,9 +6,9 @@ async function getNewPage() {
   try {
     await page.goto('https://pptr.dev/');
     await page.type('.navbar__search-input', 'pdf');
-    await page.waitForSelector('.navbar__search-input');
+    await page.waitForTimeout(2000);
     await page.keyboard.press('Enter');
-    await page.waitForSelector('img');
+    await page.waitForSelector('#remarks');
     await page.pdf({ path: 'newPage.pdf', format: 'A4' });
 
     await browser.close();
