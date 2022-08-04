@@ -102,4 +102,7 @@ socket.on('userOffline', (data) => {
 
 socket.on('typing', (data) => {
   feedback.innerHTML = `<p><em>${data} is typing a message...</em></p>`;
+  setTimeout(() => {
+    feedback.innerHTML = '';
+  }, 5000);
 });
